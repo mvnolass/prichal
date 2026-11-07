@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Барбершоп «Причал» — демо-сайт</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#111214; --card:#1b1c20; --line:#2a2c31; --text:#ececec; --muted:#9a9ca3;
+    --accent:#c9a45c; --accent-dark:#a8863f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.5}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .demo-badge{background:var(--accent);color:#111;text-align:center;font-size:13px;font-weight:600;padding:6px 10px}
+
+  header{position:sticky;top:0;z-index:10;background:rgba(17,18,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-family:Oswald,sans-serif;font-size:22px;letter-spacing:2px;text-transform:uppercase}
+  .logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:24px;font-size:15px;color:var(--muted)}
+  .nav-links a:hover{color:var(--text)}
+  .btn{display:inline-block;background:var(--accent);color:#111;font-weight:600;padding:12px 22px;border-radius:8px;border:none;cursor:pointer;font-size:15px;transition:.2s}
+  .btn:hover{background:var(--accent-dark)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{background:var(--card)}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  .hero{position:relative;padding:96px 0 88px;overflow:hidden;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(201,164,92,.18), transparent 55%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,.02) 0 2px, transparent 2px 14px),
+      var(--bg)}
+  .hero h1{font-family:Oswald,sans-serif;font-size:clamp(40px,7vw,72px);line-height:1.05;text-transform:uppercase;max-width:700px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p{color:var(--muted);font-size:18px;max-width:520px;margin:20px 0 32px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .facts{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
+  .facts b{display:block;font-family:Oswald,sans-serif;font-size:32px;color:var(--accent)}
+  .facts span{color:var(--muted);font-size:14px}
+
+  section{padding:80px 0}
+  h2{font-family:Oswald,sans-serif;font-size:clamp(30px,4.5vw,42px);text-transform:uppercase;margin-bottom:12px}
+  .sub{color:var(--muted);margin-bottom:40px}
+
+  .prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .price{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+  .price h3{font-size:17px;font-weight:600;margin-bottom:4px}
+  .price p{color:var(--muted);font-size:14px}
+  .price .cost{font-family:Oswald,sans-serif;font-size:22px;color:var(--accent);white-space:nowrap}
+
+  .masters{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .master{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .avatar{height:200px;display:flex;align-items:center;justify-content:center;font-family:Oswald,sans-serif;font-size:56px;color:rgba(17,18,20,.75)}
+  .master div.info{padding:18px}
+  .master h3{font-size:18px}
+  .master p{color:var(--muted);font-size:14px}
+
+  .reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .review{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+  .stars{color:var(--accent);letter-spacing:2px;margin-bottom:10px}
+  .review p{font-size:15px}
+  .review small{display:block;color:var(--muted);margin-top:12px}
+
+  .booking{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  @media(max-width:820px){.booking-grid{grid-template-columns:1fr}}
+  form{display:grid;gap:14px}
+  label{font-size:14px;color:var(--muted);display:grid;gap:6px}
+  input,select{background:var(--bg);border:1px solid var(--line);color:var(--text);padding:13px 14px;border-radius:8px;font-size:15px;font-family:inherit}
+  input:focus,select:focus{outline:none;border-color:var(--accent)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .ok{display:none;background:rgba(201,164,92,.12);border:1px solid var(--accent);border-radius:10px;padding:18px}
+  .ok b{color:var(--accent)}
+  .tg-note{display:flex;gap:12px;align-items:flex-start;margin-top:24px;color:var(--muted);font-size:14px}
+  .tg-note svg{flex:none}
+
+  .contacts{display:grid;grid-template-columns:1fr 1.2fr;gap:32px}
+  @media(max-width:820px){.contacts{grid-template-columns:1fr}}
+  .contact-list{display:grid;gap:18px}
+  .contact-list div span{display:block;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:1px}
+  .contact-list div b{font-size:18px;font-weight:500}
+  .map{border-radius:12px;border:1px solid var(--line);min-height:280px;position:relative;overflow:hidden;
+    background:
+      linear-gradient(90deg, transparent 49%, #2a2c31 49% 51%, transparent 51%) 0 0/80px 80px,
+      linear-gradient(0deg, transparent 49%, #2a2c31 49% 51%, transparent 51%) 0 0/80px 80px,
+      linear-gradient(160deg,#1a2a33,#16181b 60%)}
+  .pin{position:absolute;left:50%;top:45%;transform:translate(-50%,-100%);text-align:center}
+  .pin div{width:22px;height:22px;background:var(--accent);border-radius:50% 50% 50% 0;transform:rotate(-45deg);margin:0 auto;box-shadow:0 0 0 8px rgba(201,164,92,.2)}
+  .pin span{display:block;margin-top:14px;background:var(--bg);padding:4px 10px;border-radius:6px;font-size:13px}
+
+  footer{padding:32px 0;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="demo-badge">Демо-пример сайта · барбершоп вымышленный</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">При<span>чал</span></a>
+    <nav class="nav-links">
+      <a href="#prices">Услуги</a>
+      <a href="#masters">Мастера</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a href="#booking" class="btn">Записаться</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1>Мужские стрижки в центре Севастополя</h1>
+      <p>Стрижка, борода и бритьё опасной бритвой. Без очередей: записывайтесь онлайн за минуту.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn">Записаться онлайн</a>
+        <a href="#prices" class="btn btn-ghost">Смотреть цены</a>
+      </div>
+      <div class="facts">
+        <div><b>7 лет</b><span>работаем в городе</span></div>
+        <div><b>4,9 ★</b><span>рейтинг на картах</span></div>
+        <div><b>10:00–21:00</b><span>ежедневно</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="prices">
+    <div class="wrap">
+      <h2>Услуги и цены</h2>
+      <p class="sub">Цены указаны за работу мастера, все средства включены.</p>
+      <div class="prices">
+        <div class="price"><div><h3>Мужская стрижка</h3><p>Консультация, мытьё головы, укладка</p></div><div class="cost">1 200 ₽</div></div>
+        <div class="price"><div><h3>Стрижка машинкой</h3><p>Одна насадка, окантовка</p></div><div class="cost">700 ₽</div></div>
+        <div class="price"><div><h3>Моделирование бороды</h3><p>Форма, контур, уход маслом</p></div><div class="cost">800 ₽</div></div>
+        <div class="price"><div><h3>Стрижка + борода</h3><p>Комплекс со скидкой</p></div><div class="cost">1 800 ₽</div></div>
+        <div class="price"><div><h3>Королевское бритьё</h3><p>Опасная бритва, горячее полотенце</p></div><div class="cost">1 000 ₽</div></div>
+        <div class="price"><div><h3>Детская стрижка</h3><p>До 12 лет</p></div><div class="cost">900 ₽</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="masters">
+    <div class="wrap">
+      <h2>Мастера</h2>
+      <p class="sub">Выберите мастера при записи или доверьтесь нам.</p>
+      <div class="masters">
+        <div class="master"><div class="avatar" style="background:linear-gradient(135deg,#c9a45c,#7d6230)">А</div><div class="info"><h3>Артём</h3><p>Топ-барбер · 8 лет опыта</p></div></div>
+        <div class="master"><div class="avatar" style="background:linear-gradient(135deg,#8fa3ad,#4b5d66)">Д</div><div class="info"><h3>Денис</h3><p>Барбер · фейды и борода</p></div></div>
+        <div class="master"><div class="avatar" style="background:linear-gradient(135deg,#b58b7a,#6e4a3d)">М</div><div class="info"><h3>Максим</h3><p>Барбер · классика и бритьё</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <h2>Отзывы</h2>
+      <p class="sub">Сюда подставляются настоящие отзывы клиента, например с Яндекс Карт.</p>
+      <div class="reviews">
+        <div class="review"><div class="stars">★★★★★</div><p>Пример отзыва: короткий текст о том, что понравилось клиенту.</p><small>Имя клиента · Яндекс Карты</small></div>
+        <div class="review"><div class="stars">★★★★★</div><p>Пример отзыва: здесь будет реальный отзыв, скопированный с разрешения.</p><small>Имя клиента · Яндекс Карты</small></div>
+        <div class="review"><div class="stars">★★★★★</div><p>Пример отзыва: два-три предложения обычно смотрятся лучше всего.</p><small>Имя клиента · Яндекс Карты</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking" class="booking">
+    <div class="wrap booking-grid">
+      <div>
+        <h2>Онлайн-запись</h2>
+        <p class="sub" style="margin-bottom:0">Оставьте заявку, и администратор перезвонит в течение 15 минут, чтобы подтвердить время.</p>
+        <div class="tg-note">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#c9a45c"><path d="M9.8 15.6l-.4 4.1c.5 0 .8-.2 1-.5l2.5-2.4 5.2 3.8c1 .5 1.6.3 1.9-.9l3.4-16c.3-1.4-.5-2-1.5-1.6L1.9 9.6c-1.4.5-1.3 1.3-.2 1.7l5.1 1.6L18.5 5.4c.6-.4 1.1-.2.7.2"/></svg>
+          <span>Заявки с сайта сразу приходят владельцу в Telegram: имя, телефон, услуга и удобное время.</span>
+        </div>
+      </div>
+      <div>
+        <form id="form">
+          <label>Ваше имя<input required name="name" placeholder="Например, Алексей"></label>
+          <label>Телефон<input required name="phone" type="tel" placeholder="+7 (978) 000-00-00"></label>
+          <label>Услуга
+            <select name="service">
+              <option>Мужская стрижка</option><option>Стрижка машинкой</option><option>Моделирование бороды</option>
+              <option>Стрижка + борода</option><option>Королевское бритьё</option><option>Детская стрижка</option>
+            </select>
+          </label>
+          <div class="row">
+            <label>Дата<input name="date" type="date"></label>
+            <label>Время
+              <select name="time"><option>Утро</option><option>День</option><option>Вечер</option></select>
+            </label>
+          </div>
+          <button class="btn" type="submit">Отправить заявку</button>
+        </form>
+        <div class="ok" id="ok"><b>Это демо.</b> На настоящем сайте заявка сейчас ушла бы владельцу в Telegram, а клиенту бы перезвонили.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts">
+    <div class="wrap">
+      <h2>Контакты</h2>
+      <p class="sub">Удобно добраться пешком и на общественном транспорте.</p>
+      <div class="contacts">
+        <div class="contact-list">
+          <div><span>Адрес</span><b>Севастополь, ул. Примерная, 1</b></div>
+          <div><span>Телефон</span><b>+7 (978) 000-00-00</b></div>
+          <div><span>Режим работы</span><b>Ежедневно 10:00–21:00</b></div>
+          <div><span>Соцсети</span><b>Telegram · VK</b></div>
+        </div>
+        <div class="map"><div class="pin"><div></div><span>Причал · барбершоп</span></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© Барбершоп «Причал», Севастополь</footer>
+
+<script>
+  document.getElementById('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    this.style.display='none';
+    document.getElementById('ok').style.display='block';
+  });
+</script>
+</body>
+</html>
